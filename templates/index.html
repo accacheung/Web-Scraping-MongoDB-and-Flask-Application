@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Mission to Mars</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+        <div clas="container">
+                <div class="jumbotron">
+                    <h1 align="center">Mission to Mars</h1>
+                    
+                    <p align="Center">
+                        <a class="btn btn-primary btn-lg" href="./scrape" role="button">Scarpe New Data</a>
+                    </p>
+                </div>
+                <div class="page-header">
+                    <h1>Latest Mars News</h1>
+                </div>
+        </div>  
+
+                {% for data in data %} 
+                <div class="container-fluid">
+                    <h2>{{data.news_title}}</h2>
+                    <p>{{data.news_p}}</p>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <h3>Featured Mars Image</h3>
+                            
+                            <img src="https://jpl.nasa.gov/spaceimages/images/wallpaper/PIA22708-640x350.jpg" alt="featured_image_url" style="width: 80%;">
+
+                        </div>
+                        <div class="col-md-5">
+                            <ul>
+                                <h3>Current Weater on Mars</h3>
+                                {{data.mars_weather}}
+                            </ul>
+                                
+                                
+                            <ul>
+                                <h3>Mars Facts</h3>
+                                {{data.html_table|safe}} <!-- Adding |safe to keep table's formatting--> 
+                                <a href="{{data.html_table}}"></a>
+                            </ul>
+                        </div>
+                    </div>                 
+                </div>
+                
+                <div class="container-fluid">
+                    <H3 align="center">Mars Hemispheres</H3>
+                    <div class="body">
+                    <div class="row">
+                        {% for hemisphere in data.hemisphere_image_urls %}
+                        <div class="col-md-6">
+                          <!-- https://getbootstrap.com/docs/4.0/content/figures/ -->  
+                          <figure class="figure">
+                            <img class="figure-img img-fluid rounded" src="{{ hemisphere.image_url }}" style="width:75%;">
+                            <figcaption class="figure-caption"><h4>{{ hemisphere.title }}</h4></figcaption>
+                          </figure>
+                        </div>
+                        {% endfor %}                                           
+                    </div>
+                    </div>
+
+                </div>
+                
+                
+                {% endfor %}              
+                             
+            </div>
+            
+        </div>
+    
+
+</body>
+
+</html>
