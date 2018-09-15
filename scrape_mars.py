@@ -1,3 +1,4 @@
+# Dependencies
 from bs4 import BeautifulSoup
 from splinter import Browser
 import requests
